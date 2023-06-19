@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quick_memo_app_flutter/utils/common_colors.dart';
 import 'package:quick_memo_app_flutter/utils/strings.dart';
 import 'package:quick_memo_app_flutter/views/screens/main_screen.dart';
+import 'package:quick_memo_app_flutter/views/screens/read_and_edit_screen.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -19,7 +20,9 @@ class MyApp extends StatelessWidget {
         colorScheme: CommonColors.themeColorScheme,
         useMaterial3: true,
       ),
-      home: const MainScreen(title: Strings.appName),
+      // home: const MainScreen(title: Strings.appName),
+      // 確認のために一旦ReadAndEditScreenを表示する
+      home: ReadAndEditScreen(),
     );
   }
 }
