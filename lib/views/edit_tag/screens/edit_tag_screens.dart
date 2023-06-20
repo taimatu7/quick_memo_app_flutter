@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quick_memo_app_flutter/views/edit_tag/widgets/dialogs/color_picker_dialog.dart';
 import 'package:quick_memo_app_flutter/views/share/route_drawer.dart';

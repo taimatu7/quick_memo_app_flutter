@@ -5,6 +5,7 @@ import 'package:quick_memo_app_flutter/utils/common_sizes.dart';
 import 'package:quick_memo_app_flutter/views/edit_tag/screens/edit_tag_screens.dart';
 import 'package:quick_memo_app_flutter/views/main/screens/main_screen.dart';
 import 'package:quick_memo_app_flutter/views/read_and_edit/screens/read_and_edit_screen.dart';
+import 'package:quick_memo_app_flutter/views/setting/screens/setting_screen.dart';
 
 class RouteDrawer extends StatelessWidget {
   const RouteDrawer({super.key});
@@ -46,7 +47,9 @@ class RouteDrawer extends StatelessWidget {
           ),
           ListTile(
             title: const Text('設定画面'),
-            onTap: () {},
+            onTap: () {
+              context.goNamed(SettingScreen.routeName);
+            },
           ),
         ],
       ),
