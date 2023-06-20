@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:quick_memo_app_flutter/views/edit_tag/widgets/dialogs/color_picker_dialog.dart';
 import 'package:quick_memo_app_flutter/views/share/route_drawer.dart';
 
 class EditTagScreen extends ConsumerWidget {
@@ -8,6 +9,14 @@ class EditTagScreen extends ConsumerWidget {
   static const routeName = '/edit_tag';
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    void showPickerDialog() {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const ColorPickerDialog();
+          });
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('メモ閲覧・編集画面'),
@@ -30,7 +39,9 @@ class EditTagScreen extends ConsumerWidget {
                 children: [
                   IconButton(
                     icon: const Icon(Icons.color_lens_outlined),
-                    onPressed: () {},
+                    onPressed: () {
+                      showPickerDialog();
+                    },
                   ),
                   IconButton(
                     icon: const Icon(Icons.delete),
@@ -49,7 +60,9 @@ class EditTagScreen extends ConsumerWidget {
                 children: [
                   IconButton(
                     icon: const Icon(Icons.color_lens_outlined),
-                    onPressed: () {},
+                    onPressed: () {
+                      showPickerDialog();
+                    },
                   ),
                   IconButton(
                     icon: const Icon(Icons.delete),

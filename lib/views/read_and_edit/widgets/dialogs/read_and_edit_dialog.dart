@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ReadAndEditDialog extends StatelessWidget {
+  const ReadAndEditDialog({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
