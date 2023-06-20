@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:quick_memo_app_flutter/utils/common_colors.dart';
 import 'package:quick_memo_app_flutter/utils/common_sizes.dart';
 import 'package:quick_memo_app_flutter/views/edit_tag/screens/edit_tag_screens.dart';
-import 'package:quick_memo_app_flutter/views/main/screens/main_screen.dart';
+import 'package:quick_memo_app_flutter/views/write/screens/main_screen.dart';
 import 'package:quick_memo_app_flutter/views/read_and_edit/screens/read_and_edit_screen.dart';
 import 'package:quick_memo_app_flutter/views/setting/screens/setting_screen.dart';
 
