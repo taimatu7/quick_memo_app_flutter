@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:quick_memo_app_flutter/utils/common_colors.dart';
 import 'package:quick_memo_app_flutter/utils/common_sizes.dart';
+import 'package:quick_memo_app_flutter/utils/strings.dart';
+import 'package:quick_memo_app_flutter/views/read_and_edit/screens/read_and_edit_screen.dart';
+import 'package:quick_memo_app_flutter/views/share/route_drawer.dart';
 
 class MainScreen extends ConsumerWidget {
-  const MainScreen({super.key, required this.title});
-  final String title;
+  const MainScreen({super.key});
+  static const routeName = '/';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(title),
+        title: const Text(Strings.appName),
         actions: [
           IconButton(
             icon: const Icon(Icons.fiber_new_sharp),
@@ -68,40 +72,7 @@ class MainScreen extends ConsumerWidget {
         tooltip: 'Increment',
         child: const Icon(Icons.save),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: CommonColors.themeColor,
-              ),
-              child: Text(
-                '機能一覧',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: CommonSizes.drawerHederFontSize),
-              ),
-            ),
-            ListTile(
-              title: const Text('メモ入力画面'),
-              onTap: () {},
-            ),
-            ListTile(
-              title: const Text('メモ閲覧・編集画面'),
-              onTap: () {},
-            ),
-            ListTile(
-              title: const Text('タグ編集画面'),
-              onTap: () {},
-            ),
-            ListTile(
-              title: const Text('設定画面'),
-              onTap: () {},
-            ),
-          ],
-        ),
-      ),
+      drawer: const RouteDrawer(),
     );
   }
 }

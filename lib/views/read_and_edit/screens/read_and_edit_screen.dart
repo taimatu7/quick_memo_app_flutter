@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quick_memo_app_flutter/views/read_and_edit/widgets/dialogs/read_and_edit_dialog.dart';
+import 'package:quick_memo_app_flutter/views/share/route_drawer.dart';
 
 class ReadAndEditScreen extends ConsumerWidget {
+  const ReadAndEditScreen({super.key});
+  static const routeName = '/read_and_edit';
   // ダイアログ表示
   void _showDialog(BuildContext context) {
     showModalBottomSheet(
@@ -61,6 +64,7 @@ class ReadAndEditScreen extends ConsumerWidget {
           )
         ],
       ),
+      drawer: const RouteDrawer(),
     );
   }
 }
