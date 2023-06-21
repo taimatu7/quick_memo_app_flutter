@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:quick_memo_app_flutter/views/share/route_drawer.dart';
+import 'package:quick_memo_app_flutter/views/shared/route_drawer.dart';
 
 class SettingScreen extends ConsumerWidget {
   const SettingScreen({Key? key}) : super(key: key);

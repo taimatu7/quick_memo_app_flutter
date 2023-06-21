@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quick_memo_app_flutter/utils/strings.dart';
-import 'package:quick_memo_app_flutter/views/share/route_drawer.dart';
+import 'package:quick_memo_app_flutter/views/shared/route_drawer.dart';
 
 class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});
