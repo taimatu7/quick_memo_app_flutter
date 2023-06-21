@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quick_memo_app_flutter/utils/strings.dart';
+import 'package:quick_memo_app_flutter/view_models/write/main_screen_notifier.dart';
 import 'package:quick_memo_app_flutter/views/shared/route_drawer.dart';
 
 class MainScreen extends ConsumerWidget {
-  const MainScreen({super.key});
+  MainScreen({super.key});
   static const routeName = '/';
+  final TextEditingController _textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final mainScreenState = ref.watch(mainScreenNotifierProvier);
+    final mainScreenStateNotifier =
+        ref.read(mainScreenNotifierProvier.notifier);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -54,17 +60,26 @@ class MainScreen extends ConsumerWidget {
             fit: FlexFit.tight,
             child: Container(
               color: Colors.white,
-              child: Column(
-                children: <Widget>[
-                  Text('メモ入力欄'),
-                ],
+              child: TextField(
+                maxLines: 999,
+                controller: _textEditingController,
               ),
             ),
           )
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          // TODO: タグを入力できるようにする
+          mainScreenStateNotifier.saveMemo(_textEditingController.text, []);
+          _textEditingController.clear();
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('メモを保存しました'),
+            ),
+          );
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.save),
       ),

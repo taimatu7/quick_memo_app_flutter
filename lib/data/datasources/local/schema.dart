@@ -7,7 +7,7 @@ class _Memo {
   @PrimaryKey()
   late ObjectId id;
   late String text;
-  late List<int> tags;
+  late List<_Tag> tags;
   late DateTime updateAt;
   late DateTime createdAt;
 }

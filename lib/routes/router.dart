@@ -13,7 +13,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         path: '/',
         name: MainScreen.routeName,
         builder: (BuildContext context, GoRouterState state) {
-          return const MainScreen();
+          return MainScreen();
         },
       ),
       GoRoute(

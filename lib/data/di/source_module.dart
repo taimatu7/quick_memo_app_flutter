@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:quick_memo_app_flutter/data/datasources/local/app_database.dart';
-import 'package:realm/realm.dart';
+import 'package:quick_memo_app_flutter/data/shared/repository/memo_repository_impl.dart';
+import 'package:quick_memo_app_flutter/domain/shared/repository/memo_repository.dart';
 
 // DIのためのProvider
 
-// DB
-final appDatabaseProvider = Provider<Realm>((ref) {
-  return AppDatabase().realm;
+// Repository
+final memoRepositoryProvider = Provider<MemoRepository>((ref) {
+  return MemoRepositoryImpl();
 });

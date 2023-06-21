@@ -12,13 +12,13 @@ class Memo extends _Memo with RealmEntity, RealmObjectBase, RealmObject {
     String text,
     DateTime updateAt,
     DateTime createdAt, {
-    Iterable<int> tags = const [],
+    Iterable<Tag> tags = const [],
   }) {
     RealmObjectBase.set(this, 'id', id);
     RealmObjectBase.set(this, 'text', text);
     RealmObjectBase.set(this, 'updateAt', updateAt);
     RealmObjectBase.set(this, 'createdAt', createdAt);
-    RealmObjectBase.set<RealmList<int>>(this, 'tags', RealmList<int>(tags));
+    RealmObjectBase.set<RealmList<Tag>>(this, 'tags', RealmList<Tag>(tags));
   }
 
   Memo._();
@@ -34,10 +34,10 @@ class Memo extends _Memo with RealmEntity, RealmObjectBase, RealmObject {
   set text(String value) => RealmObjectBase.set(this, 'text', value);
 
   @override
-  RealmList<int> get tags =>
-      RealmObjectBase.get<int>(this, 'tags') as RealmList<int>;
+  RealmList<Tag> get tags =>
+      RealmObjectBase.get<Tag>(this, 'tags') as RealmList<Tag>;
   @override
-  set tags(covariant RealmList<int> value) => throw RealmUnsupportedSetError();
+  set tags(covariant RealmList<Tag> value) => throw RealmUnsupportedSetError();
 
   @override
   DateTime get updateAt =>
@@ -66,8 +66,8 @@ class Memo extends _Memo with RealmEntity, RealmObjectBase, RealmObject {
     return const SchemaObject(ObjectType.realmObject, Memo, 'Memo', [
       SchemaProperty('id', RealmPropertyType.objectid, primaryKey: true),
       SchemaProperty('text', RealmPropertyType.string),
-      SchemaProperty('tags', RealmPropertyType.int,
-          collectionType: RealmCollectionType.list),
+      SchemaProperty('tags', RealmPropertyType.object,
+          linkTarget: 'Tag', collectionType: RealmCollectionType.list),
       SchemaProperty('updateAt', RealmPropertyType.timestamp),
       SchemaProperty('createdAt', RealmPropertyType.timestamp),
     ]);
