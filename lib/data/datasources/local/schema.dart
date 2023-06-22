@@ -3,17 +3,17 @@ import 'package:realm/realm.dart';
 part 'schema.g.dart';
 
 @RealmModel()
-class _Memo {
+class _MemoModel {
   @PrimaryKey()
   late ObjectId id;
   late String text;
-  late List<_Tag> tags;
+  late List<_TagModel> tags;
   late DateTime updateAt;
   late DateTime createdAt;
 }
 
 @RealmModel()
-class _Tag {
+class _TagModel {
   @PrimaryKey()
   late ObjectId id;
   late String name;

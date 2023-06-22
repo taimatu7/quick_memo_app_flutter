@@ -1,5 +1,5 @@
-import 'package:quick_memo_app_flutter/data/datasources/local/schema.dart';
 import 'package:quick_memo_app_flutter/data/shared/source/local/memo_dao.dart';
+import 'package:quick_memo_app_flutter/domain/shared/model/memo.dart';
 import 'package:quick_memo_app_flutter/domain/shared/repository/memo_repository.dart';
 
 class MemoRepositoryImpl implements MemoRepository {
@@ -12,7 +12,7 @@ class MemoRepositoryImpl implements MemoRepository {
   }
 
   @override
-  Memo? getById(int id) {
+  Memo? getById(String id) {
     return _memoDao.getById(id);
   }
 

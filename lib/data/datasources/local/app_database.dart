@@ -5,8 +5,8 @@ class AppDatabase {
   late Realm realm;
   AppDatabase() {
     List<SchemaObject> schemaObjects = [
-      Memo.schema,
-      Tag.schema,
+      MemoModel.schema,
+      TagModel.schema,
     ];
     final config = Configuration.local(schemaObjects);
     realm = Realm(config);

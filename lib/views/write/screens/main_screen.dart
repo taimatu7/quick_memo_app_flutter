@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quick_memo_app_flutter/utils/strings.dart';
-import 'package:quick_memo_app_flutter/view_models/write/main_screen_notifier.dart';
+import 'package:quick_memo_app_flutter/view_models/write/main_screen_state_notifier.dart';
 import 'package:quick_memo_app_flutter/views/shared/route_drawer.dart';
 
 class MainScreen extends ConsumerWidget {
@@ -11,9 +11,9 @@ class MainScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final mainScreenState = ref.watch(mainScreenNotifierProvier);
+    final mainScreenState = ref.watch(mainScreenStateNotifierProvier);
     final mainScreenStateNotifier =
-        ref.read(mainScreenNotifierProvier.notifier);
+        ref.read(mainScreenStateNotifierProvier.notifier);
 
     return Scaffold(
       appBar: AppBar(

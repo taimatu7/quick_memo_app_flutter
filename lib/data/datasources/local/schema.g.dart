@@ -6,22 +6,24 @@ part of 'schema.dart';
 // RealmObjectGenerator
 // **************************************************************************
 
-class Memo extends _Memo with RealmEntity, RealmObjectBase, RealmObject {
-  Memo(
+class MemoModel extends _MemoModel
+    with RealmEntity, RealmObjectBase, RealmObject {
+  MemoModel(
     ObjectId id,
     String text,
     DateTime updateAt,
     DateTime createdAt, {
-    Iterable<Tag> tags = const [],
+    Iterable<TagModel> tags = const [],
   }) {
     RealmObjectBase.set(this, 'id', id);
     RealmObjectBase.set(this, 'text', text);
     RealmObjectBase.set(this, 'updateAt', updateAt);
     RealmObjectBase.set(this, 'createdAt', createdAt);
-    RealmObjectBase.set<RealmList<Tag>>(this, 'tags', RealmList<Tag>(tags));
+    RealmObjectBase.set<RealmList<TagModel>>(
+        this, 'tags', RealmList<TagModel>(tags));
   }
 
-  Memo._();
+  MemoModel._();
 
   @override
   ObjectId get id => RealmObjectBase.get<ObjectId>(this, 'id') as ObjectId;
@@ -34,10 +36,11 @@ class Memo extends _Memo with RealmEntity, RealmObjectBase, RealmObject {
   set text(String value) => RealmObjectBase.set(this, 'text', value);
 
   @override
-  RealmList<Tag> get tags =>
-      RealmObjectBase.get<Tag>(this, 'tags') as RealmList<Tag>;
+  RealmList<TagModel> get tags =>
+      RealmObjectBase.get<TagModel>(this, 'tags') as RealmList<TagModel>;
   @override
-  set tags(covariant RealmList<Tag> value) => throw RealmUnsupportedSetError();
+  set tags(covariant RealmList<TagModel> value) =>
+      throw RealmUnsupportedSetError();
 
   @override
   DateTime get updateAt =>
@@ -53,29 +56,30 @@ class Memo extends _Memo with RealmEntity, RealmObjectBase, RealmObject {
       RealmObjectBase.set(this, 'createdAt', value);
 
   @override
-  Stream<RealmObjectChanges<Memo>> get changes =>
-      RealmObjectBase.getChanges<Memo>(this);
+  Stream<RealmObjectChanges<MemoModel>> get changes =>
+      RealmObjectBase.getChanges<MemoModel>(this);
 
   @override
-  Memo freeze() => RealmObjectBase.freezeObject<Memo>(this);
+  MemoModel freeze() => RealmObjectBase.freezeObject<MemoModel>(this);
 
   static SchemaObject get schema => _schema ??= _initSchema();
   static SchemaObject? _schema;
   static SchemaObject _initSchema() {
-    RealmObjectBase.registerFactory(Memo._);
-    return const SchemaObject(ObjectType.realmObject, Memo, 'Memo', [
+    RealmObjectBase.registerFactory(MemoModel._);
+    return const SchemaObject(ObjectType.realmObject, MemoModel, 'MemoModel', [
       SchemaProperty('id', RealmPropertyType.objectid, primaryKey: true),
       SchemaProperty('text', RealmPropertyType.string),
       SchemaProperty('tags', RealmPropertyType.object,
-          linkTarget: 'Tag', collectionType: RealmCollectionType.list),
+          linkTarget: 'TagModel', collectionType: RealmCollectionType.list),
       SchemaProperty('updateAt', RealmPropertyType.timestamp),
       SchemaProperty('createdAt', RealmPropertyType.timestamp),
     ]);
   }
 }
 
-class Tag extends _Tag with RealmEntity, RealmObjectBase, RealmObject {
-  Tag(
+class TagModel extends _TagModel
+    with RealmEntity, RealmObjectBase, RealmObject {
+  TagModel(
     ObjectId id,
     String name,
     DateTime updateAt,
@@ -87,7 +91,7 @@ class Tag extends _Tag with RealmEntity, RealmObjectBase, RealmObject {
     RealmObjectBase.set(this, 'createdAt', createdAt);
   }
 
-  Tag._();
+  TagModel._();
 
   @override
   ObjectId get id => RealmObjectBase.get<ObjectId>(this, 'id') as ObjectId;
@@ -113,17 +117,17 @@ class Tag extends _Tag with RealmEntity, RealmObjectBase, RealmObject {
       RealmObjectBase.set(this, 'createdAt', value);
 
   @override
-  Stream<RealmObjectChanges<Tag>> get changes =>
-      RealmObjectBase.getChanges<Tag>(this);
+  Stream<RealmObjectChanges<TagModel>> get changes =>
+      RealmObjectBase.getChanges<TagModel>(this);
 
   @override
-  Tag freeze() => RealmObjectBase.freezeObject<Tag>(this);
+  TagModel freeze() => RealmObjectBase.freezeObject<TagModel>(this);
 
   static SchemaObject get schema => _schema ??= _initSchema();
   static SchemaObject? _schema;
   static SchemaObject _initSchema() {
-    RealmObjectBase.registerFactory(Tag._);
-    return const SchemaObject(ObjectType.realmObject, Tag, 'Tag', [
+    RealmObjectBase.registerFactory(TagModel._);
+    return const SchemaObject(ObjectType.realmObject, TagModel, 'TagModel', [
       SchemaProperty('id', RealmPropertyType.objectid, primaryKey: true),
       SchemaProperty('name', RealmPropertyType.string),
       SchemaProperty('updateAt', RealmPropertyType.timestamp),
