@@ -93,7 +93,6 @@ class MainScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // TODO: タグを入力できるようにする
           mainScreenStateNotifier.saveMemo(
               _textEditingController.text, selectedTag!);
           _textEditingController.clear();

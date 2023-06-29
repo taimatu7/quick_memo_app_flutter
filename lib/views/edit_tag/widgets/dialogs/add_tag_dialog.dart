@@ -36,24 +36,24 @@ class AddTagDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('タグ名と色を入力してください'),
+      title: const Text('色を入力してください'),
       content: SizedBox(
         height: 300,
         child: Column(
           children: [
-            SizedBox(
-              height: 50,
-              child: TextField(
-                controller: _tagTextEditingController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'タグ名',
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+            // SizedBox(
+            //   height: 50,
+            //   child: TextField(
+            //     controller: _tagTextEditingController,
+            //     decoration: const InputDecoration(
+            //       border: OutlineInputBorder(),
+            //       labelText: 'タグ名',
+            //     ),
+            //   ),
+            // ),
+            // const SizedBox(
+            //   height: 20,
+            // ),
             SingleChildScrollView(
               child: ColorPicker(
                 pickerColor: pickerColor,

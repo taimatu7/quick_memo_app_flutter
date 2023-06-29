@@ -70,12 +70,18 @@ class EditTagScreen extends ConsumerWidget {
             leading: CircleAvatar(
               backgroundColor: Color(tag.color),
             ),
-            trailing: IconButton(
-              icon: const Icon(Icons.delete),
-              onPressed: () {
-                showDeleteTagDialog(tag, editTagScreenStateNotifier);
-              },
-            ),
+            // 「タグなし」タグの場合は削除できないようにする
+            trailing: tag.name != "タグなし"
+                ? IconButton(
+                    icon: const Icon(Icons.delete),
+                    onPressed: () {
+                      showDeleteTagDialog(tag, editTagScreenStateNotifier);
+                    },
+                  )
+                : const SizedBox(
+                    width: 0,
+                    height: 0,
+                  ),
             onTap: () {
               showEditTagDialog(tag, editTagScreenStateNotifier);
             },
