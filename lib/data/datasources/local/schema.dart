@@ -7,7 +7,7 @@ class _MemoModel {
   @PrimaryKey()
   late ObjectId id;
   late String text;
-  late List<_TagModel> tags;
+  late _TagModel? tag;
   late DateTime updateAt;
   late DateTime createdAt;
 }
@@ -15,8 +15,8 @@ class _MemoModel {
 @RealmModel()
 class _TagModel {
   @PrimaryKey()
-  late ObjectId id;
   late String name;
+  late int color;
   late DateTime updateAt;
   late DateTime createdAt;
 }

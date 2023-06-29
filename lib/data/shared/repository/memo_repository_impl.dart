@@ -17,7 +17,7 @@ class MemoRepositoryImpl implements MemoRepository {
   }
 
   @override
-  bool save(Memo memo) {
+  Memo save(Memo memo) {
     return _memoDao.save(memo);
   }
 

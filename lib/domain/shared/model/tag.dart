@@ -1,8 +1,7 @@
 class Tag {
-  final String id;
   final String name;
+  final int color;
   final DateTime createdAt;
   final DateTime updatedAt;
-
-  Tag(this.id, this.name, this.createdAt, this.updatedAt);
+  Tag(this.name, this.color, this.createdAt, this.updatedAt);
 }

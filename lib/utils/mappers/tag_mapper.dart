@@ -5,8 +5,8 @@ import 'package:realm/realm.dart';
 class TagMapper {
   static TagModel toDataModel(Tag tag) {
     return TagModel(
-      ObjectId.fromHexString(tag.id),
       tag.name,
+      tag.color,
       tag.updatedAt,
       tag.createdAt,
     );
@@ -14,8 +14,8 @@ class TagMapper {
 
   static Tag toDomainModel(TagModel model) {
     return Tag(
-      model.id.toString(),
       model.name,
+      model.color,
       model.createdAt,
       model.updateAt,
     );

@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MainScreenState {
-  List<Tag> get tags => throw _privateConstructorUsedError;
-  List<Memo> get memos => throw _privateConstructorUsedError;
+  List<Map<String, Object>> get tagsWithSelectCheck =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MainScreenStateCopyWith<MainScreenState> get copyWith =>
@@ -30,7 +30,7 @@ abstract class $MainScreenStateCopyWith<$Res> {
           MainScreenState value, $Res Function(MainScreenState) then) =
       _$MainScreenStateCopyWithImpl<$Res, MainScreenState>;
   @useResult
-  $Res call({List<Tag> tags, List<Memo> memos});
+  $Res call({List<Map<String, Object>> tagsWithSelectCheck});
 }
 
 /// @nodoc
@@ -46,18 +46,13 @@ class _$MainScreenStateCopyWithImpl<$Res, $Val extends MainScreenState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tags = null,
-    Object? memos = null,
+    Object? tagsWithSelectCheck = null,
   }) {
     return _then(_value.copyWith(
-      tags: null == tags
-          ? _value.tags
-          : tags // ignore: cast_nullable_to_non_nullable
-              as List<Tag>,
-      memos: null == memos
-          ? _value.memos
-          : memos // ignore: cast_nullable_to_non_nullable
-              as List<Memo>,
+      tagsWithSelectCheck: null == tagsWithSelectCheck
+          ? _value.tagsWithSelectCheck
+          : tagsWithSelectCheck // ignore: cast_nullable_to_non_nullable
+              as List<Map<String, Object>>,
     ) as $Val);
   }
 }
@@ -70,7 +65,7 @@ abstract class _$$_MainScreenStateCopyWith<$Res>
       __$$_MainScreenStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Tag> tags, List<Memo> memos});
+  $Res call({List<Map<String, Object>> tagsWithSelectCheck});
 }
 
 /// @nodoc
@@ -84,18 +79,13 @@ class __$$_MainScreenStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tags = null,
-    Object? memos = null,
+    Object? tagsWithSelectCheck = null,
   }) {
     return _then(_$_MainScreenState(
-      tags: null == tags
-          ? _value._tags
-          : tags // ignore: cast_nullable_to_non_nullable
-              as List<Tag>,
-      memos: null == memos
-          ? _value._memos
-          : memos // ignore: cast_nullable_to_non_nullable
-              as List<Memo>,
+      tagsWithSelectCheck: null == tagsWithSelectCheck
+          ? _value._tagsWithSelectCheck
+          : tagsWithSelectCheck // ignore: cast_nullable_to_non_nullable
+              as List<Map<String, Object>>,
     ));
   }
 }
@@ -104,31 +94,22 @@ class __$$_MainScreenStateCopyWithImpl<$Res>
 
 class _$_MainScreenState implements _MainScreenState {
   const _$_MainScreenState(
-      {final List<Tag> tags = const [], final List<Memo> memos = const []})
-      : _tags = tags,
-        _memos = memos;
+      {final List<Map<String, Object>> tagsWithSelectCheck = const []})
+      : _tagsWithSelectCheck = tagsWithSelectCheck;
 
-  final List<Tag> _tags;
+  final List<Map<String, Object>> _tagsWithSelectCheck;
   @override
   @JsonKey()
-  List<Tag> get tags {
-    if (_tags is EqualUnmodifiableListView) return _tags;
+  List<Map<String, Object>> get tagsWithSelectCheck {
+    if (_tagsWithSelectCheck is EqualUnmodifiableListView)
+      return _tagsWithSelectCheck;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tags);
-  }
-
-  final List<Memo> _memos;
-  @override
-  @JsonKey()
-  List<Memo> get memos {
-    if (_memos is EqualUnmodifiableListView) return _memos;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_memos);
+    return EqualUnmodifiableListView(_tagsWithSelectCheck);
   }
 
   @override
   String toString() {
-    return 'MainScreenState(tags: $tags, memos: $memos)';
+    return 'MainScreenState(tagsWithSelectCheck: $tagsWithSelectCheck)';
   }
 
   @override
@@ -136,15 +117,13 @@ class _$_MainScreenState implements _MainScreenState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MainScreenState &&
-            const DeepCollectionEquality().equals(other._tags, _tags) &&
-            const DeepCollectionEquality().equals(other._memos, _memos));
+            const DeepCollectionEquality()
+                .equals(other._tagsWithSelectCheck, _tagsWithSelectCheck));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_tags),
-      const DeepCollectionEquality().hash(_memos));
+      runtimeType, const DeepCollectionEquality().hash(_tagsWithSelectCheck));
 
   @JsonKey(ignore: true)
   @override
@@ -155,12 +134,11 @@ class _$_MainScreenState implements _MainScreenState {
 
 abstract class _MainScreenState implements MainScreenState {
   const factory _MainScreenState(
-      {final List<Tag> tags, final List<Memo> memos}) = _$_MainScreenState;
+          {final List<Map<String, Object>> tagsWithSelectCheck}) =
+      _$_MainScreenState;
 
   @override
-  List<Tag> get tags;
-  @override
-  List<Memo> get memos;
+  List<Map<String, Object>> get tagsWithSelectCheck;
   @override
   @JsonKey(ignore: true)
   _$$_MainScreenStateCopyWith<_$_MainScreenState> get copyWith =>

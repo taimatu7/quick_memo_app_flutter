@@ -13,14 +13,13 @@ class MemoModel extends _MemoModel
     String text,
     DateTime updateAt,
     DateTime createdAt, {
-    Iterable<TagModel> tags = const [],
+    TagModel? tag,
   }) {
     RealmObjectBase.set(this, 'id', id);
     RealmObjectBase.set(this, 'text', text);
+    RealmObjectBase.set(this, 'tag', tag);
     RealmObjectBase.set(this, 'updateAt', updateAt);
     RealmObjectBase.set(this, 'createdAt', createdAt);
-    RealmObjectBase.set<RealmList<TagModel>>(
-        this, 'tags', RealmList<TagModel>(tags));
   }
 
   MemoModel._();
@@ -36,11 +35,9 @@ class MemoModel extends _MemoModel
   set text(String value) => RealmObjectBase.set(this, 'text', value);
 
   @override
-  RealmList<TagModel> get tags =>
-      RealmObjectBase.get<TagModel>(this, 'tags') as RealmList<TagModel>;
+  TagModel? get tag => RealmObjectBase.get<TagModel>(this, 'tag') as TagModel?;
   @override
-  set tags(covariant RealmList<TagModel> value) =>
-      throw RealmUnsupportedSetError();
+  set tag(covariant TagModel? value) => RealmObjectBase.set(this, 'tag', value);
 
   @override
   DateTime get updateAt =>
@@ -69,8 +66,8 @@ class MemoModel extends _MemoModel
     return const SchemaObject(ObjectType.realmObject, MemoModel, 'MemoModel', [
       SchemaProperty('id', RealmPropertyType.objectid, primaryKey: true),
       SchemaProperty('text', RealmPropertyType.string),
-      SchemaProperty('tags', RealmPropertyType.object,
-          linkTarget: 'TagModel', collectionType: RealmCollectionType.list),
+      SchemaProperty('tag', RealmPropertyType.object,
+          optional: true, linkTarget: 'TagModel'),
       SchemaProperty('updateAt', RealmPropertyType.timestamp),
       SchemaProperty('createdAt', RealmPropertyType.timestamp),
     ]);
@@ -80,13 +77,13 @@ class MemoModel extends _MemoModel
 class TagModel extends _TagModel
     with RealmEntity, RealmObjectBase, RealmObject {
   TagModel(
-    ObjectId id,
     String name,
+    int color,
     DateTime updateAt,
     DateTime createdAt,
   ) {
-    RealmObjectBase.set(this, 'id', id);
     RealmObjectBase.set(this, 'name', name);
+    RealmObjectBase.set(this, 'color', color);
     RealmObjectBase.set(this, 'updateAt', updateAt);
     RealmObjectBase.set(this, 'createdAt', createdAt);
   }
@@ -94,14 +91,14 @@ class TagModel extends _TagModel
   TagModel._();
 
   @override
-  ObjectId get id => RealmObjectBase.get<ObjectId>(this, 'id') as ObjectId;
-  @override
-  set id(ObjectId value) => RealmObjectBase.set(this, 'id', value);
-
-  @override
   String get name => RealmObjectBase.get<String>(this, 'name') as String;
   @override
   set name(String value) => RealmObjectBase.set(this, 'name', value);
+
+  @override
+  int get color => RealmObjectBase.get<int>(this, 'color') as int;
+  @override
+  set color(int value) => RealmObjectBase.set(this, 'color', value);
 
   @override
   DateTime get updateAt =>
@@ -128,8 +125,8 @@ class TagModel extends _TagModel
   static SchemaObject _initSchema() {
     RealmObjectBase.registerFactory(TagModel._);
     return const SchemaObject(ObjectType.realmObject, TagModel, 'TagModel', [
-      SchemaProperty('id', RealmPropertyType.objectid, primaryKey: true),
-      SchemaProperty('name', RealmPropertyType.string),
+      SchemaProperty('name', RealmPropertyType.string, primaryKey: true),
+      SchemaProperty('color', RealmPropertyType.int),
       SchemaProperty('updateAt', RealmPropertyType.timestamp),
       SchemaProperty('createdAt', RealmPropertyType.timestamp),
     ]);

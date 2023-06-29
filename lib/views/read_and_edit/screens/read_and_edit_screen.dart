@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:quick_memo_app_flutter/domain/shared/model/memo.dart';
 import 'package:quick_memo_app_flutter/view_models/read_and_edit/read_and_edit_screen_state_notifier.dart';
 import 'package:quick_memo_app_flutter/views/read_and_edit/widgets/dialogs/read_and_edit_dialog.dart';
 import 'package:quick_memo_app_flutter/views/shared/route_drawer.dart';
@@ -8,17 +9,6 @@ import 'package:quick_memo_app_flutter/views/shared/route_drawer.dart';
 class ReadAndEditScreen extends ConsumerWidget {
   const ReadAndEditScreen({super.key});
   static const routeName = '/read_and_edit';
-  // ダイアログ表示
-  void _showDialog(BuildContext context) {
-    showModalBottomSheet(
-      // シートの高さが半分以上になることがあるためtrueにする
-      isScrollControlled: true,
-      context: context,
-      builder: (_) {
-        return ReadAndEditDialog();
-      },
-    );
-  }
 
   String formatDate(DateTime date) {
     final formatter = DateFormat('MM-dd');
@@ -32,16 +22,31 @@ class ReadAndEditScreen extends ConsumerWidget {
     final readAndEditScreenStateNotifier =
         ref.watch(readAndEditScreenStateNotifierProvider.notifier);
 
+    // ダイアログ表示
+    void showDialog(Memo memo, Function onUpdate) {
+      showModalBottomSheet(
+        // シートの高さが半分以上になることがあるためtrueにする
+        isScrollControlled: true,
+        context: context,
+        builder: (BuildContext context) {
+          return ReadAndEditDialog(
+            memo: memo,
+            tagList: readAndEditScreenState.tags,
+            updateFunction: onUpdate,
+          );
+        },
+      ).then((value) {
+        if (value != null) {
+          // 更新した日付のメモを表示する
+          readAndEditScreenStateNotifier.updateDisplayMemos(value.updatedAt);
+        }
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('メモ閲覧・編集画面'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.fiber_new_sharp),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: Row(
         children: <Widget>[
@@ -50,27 +55,52 @@ class ReadAndEditScreen extends ConsumerWidget {
             flex: 1,
             child: Container(
               color: Colors.orange,
-              child: ListView.builder(
-                itemCount: readAndEditScreenState.dates.length,
-                itemBuilder: (context, index) => ListTile(
-                  title: Text(formatDate(readAndEditScreenState.dates[index])),
-                  onTap: () {
-                    readAndEditScreenStateNotifier
-                        .getMemosByDate(readAndEditScreenState.dates[index]);
-                  },
-                ),
+              child: Column(
+                children: <Widget>[
+                  Flexible(
+                    child: ListView.separated(
+                        itemCount: readAndEditScreenState.dates.length,
+                        itemBuilder: (context, index) => ListTile(
+                              contentPadding:
+                                  const EdgeInsets.symmetric(vertical: 0.0),
+                              title: Text(formatDate(
+                                  readAndEditScreenState.dates[index])),
+                              onTap: () {
+                                readAndEditScreenStateNotifier.getMemosByDate(
+                                    readAndEditScreenState.dates[index]);
+                              },
+                            ),
+                        separatorBuilder: (BuildContext context, int index) =>
+                            const Divider(
+                              color: Colors.white,
+                              height: 1.0,
+                            )),
+                  ),
+                ],
               ),
             ),
           ),
+          // メモ一覧
           Flexible(
             flex: 3,
             child: Container(
               color: Colors.orange[100],
               child: ListView.builder(
                 itemCount: readAndEditScreenState.displayMemos.length,
-                itemBuilder: (context, index) => ListTile(
-                  title: Text(readAndEditScreenState.displayMemos[index].text),
-                  onTap: () {},
+                itemBuilder: (context, index) => Card(
+                  color: Color(
+                      readAndEditScreenState.displayMemos[index].tag.color),
+                  child: ListTile(
+                    title: Text(
+                      readAndEditScreenState.displayMemos[index].text,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                    onTap: () {
+                      showDialog(readAndEditScreenState.displayMemos[index],
+                          readAndEditScreenStateNotifier.updateMemo);
+                    },
+                  ),
                 ),
               ),
             ),

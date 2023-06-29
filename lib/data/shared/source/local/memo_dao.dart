@@ -8,6 +8,7 @@ class MemoDao {
   final Realm _realm = AppDatabase().realm;
 
   List<Memo> getAll() {
+    final a = _realm.all<MemoModel>();
     return _realm
         .all<MemoModel>()
         .map((e) => MemoMapper.toDomainModel(e))
@@ -19,27 +20,15 @@ class MemoDao {
     return memo != null ? MemoMapper.toDomainModel(memo) : null;
   }
 
-  bool save(Memo memo) {
+  Memo save(Memo memo) {
     try {
       _realm.write(() {
-        _realm.add(MemoMapper.toDataModel(memo));
+        _realm.add(MemoMapper.toDataModel(memo), update: true);
       });
-      return true;
+      return memo;
     } catch (e) {
       print(e);
-      return false;
-    }
-  }
-
-  bool update(Memo memo) {
-    try {
-      _realm.write(() {
-        _realm.add<MemoModel>(MemoMapper.toDataModel(memo), update: true);
-      });
-      return true;
-    } catch (e) {
-      print(e);
-      return false;
+      throw Exception(e);
     }
   }
 

@@ -7,7 +7,7 @@ class SettingScreen extends ConsumerWidget {
   static const routeName = '/setting';
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var isDarkTheme = false;
+    // var isDarkTheme = false;
     return Scaffold(
       appBar: AppBar(
         title: const Text('設定画面'),
@@ -20,20 +20,10 @@ class SettingScreen extends ConsumerWidget {
         ],
       ),
       body: ListView(
-        children: <Widget>[
-          const ListTile(
+        children: const <Widget>[
+          ListTile(
             title: Text('バージョン'),
             trailing: Text('1.0.0'),
-          ),
-          Divider(),
-          ListTile(
-            title: const Text('ダークテーマ'),
-            trailing: Switch(
-              value: isDarkTheme,
-              onChanged: (bool value) {
-                isDarkTheme = value;
-              },
-            ),
           ),
           Divider(),
         ],

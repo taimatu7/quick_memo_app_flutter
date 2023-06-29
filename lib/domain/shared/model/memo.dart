@@ -5,7 +5,7 @@ class Memo {
   final String text;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final List<Tag> tags;
+  final Tag tag;
 
-  Memo(this.id, this.text, this.createdAt, this.updatedAt, this.tags);
+  Memo(this.id, this.text, this.createdAt, this.updatedAt, this.tag);
 }
