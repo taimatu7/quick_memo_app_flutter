@@ -29,9 +29,7 @@ class MainScreen extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.fiber_new_sharp),
             onPressed: () {
-              // タグとメモの入力値をクリアする
-              selectedTag =
-                  mainScreenState.tagsWithSelectCheck.first["tag"] as Tag;
+              // メモの入力値をクリアする
               _textEditingController.clear();
             },
           ),

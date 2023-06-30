@@ -12,12 +12,6 @@ class SettingScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('設定画面'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: ListView(
         children: const <Widget>[

@@ -4,6 +4,7 @@ import 'package:quick_memo_app_flutter/domain/shared/model/tag.dart';
 import 'package:quick_memo_app_flutter/view_models/edit_tag/edit_tag_screen_state_notifier.dart';
 import 'package:quick_memo_app_flutter/views/edit_tag/widgets/dialogs/add_tag_dialog.dart';
 import 'package:quick_memo_app_flutter/views/edit_tag/widgets/dialogs/delete_tag_dialog.dart';
+import 'package:quick_memo_app_flutter/views/edit_tag/widgets/dialogs/edit_tag_dialog.dart';
 import 'package:quick_memo_app_flutter/views/shared/route_drawer.dart';
 
 class EditTagScreen extends ConsumerWidget {
@@ -16,8 +17,25 @@ class EditTagScreen extends ConsumerWidget {
         ref.watch(editTagScreenStateNotifierProvier.notifier);
 
     void showEditTagDialog(
-        Tag? tag, EditTagScreenStateNotifier editTagScreenStateNotifier) {
-      Tag tempTag = tag ?? editTagScreenStateNotifier.createNewTag();
+        Tag tag, EditTagScreenStateNotifier editTagScreenStateNotifier) {
+      Tag tempTag = tag;
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return EditTagDialog(
+                tag: tempTag, saveFunction: editTagScreenStateNotifier.saveTag);
+          }).then((value) {
+        if (value != null) {
+          // 更新したタグを表示する
+          print(value.color);
+          editTagScreenStateNotifier.getAllTags();
+        }
+      });
+    }
+
+    void showAddTagDialog(
+        EditTagScreenStateNotifier editTagScreenStateNotifier) {
+      Tag tempTag = editTagScreenStateNotifier.createNewTag();
       showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -56,7 +74,7 @@ class EditTagScreen extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.add),
             onPressed: () {
-              showEditTagDialog(null, editTagScreenStateNotifier);
+              showAddTagDialog(editTagScreenStateNotifier);
             },
           ),
         ],
