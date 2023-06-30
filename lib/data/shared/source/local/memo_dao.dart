@@ -3,6 +3,7 @@ import 'package:quick_memo_app_flutter/data/datasources/local/schema.dart';
 import 'package:quick_memo_app_flutter/domain/shared/model/memo.dart';
 import 'package:quick_memo_app_flutter/domain/shared/model/tag.dart';
 import 'package:quick_memo_app_flutter/utils/mappers/memo_mapper.dart';
+import 'package:quick_memo_app_flutter/utils/mappers/tag_mapper.dart';
 import 'package:realm/realm.dart';
 
 class MemoDao {
@@ -16,7 +17,7 @@ class MemoDao {
   }
 
   Memo? getById(String id) {
-    final memo = _realm.find<MemoModel>(id);
+    final memo = _realm.find<MemoModel>(ObjectId.fromHexString(id));
     return memo != null ? MemoMapper.toDomainModel(memo) : null;
   }
 
@@ -37,15 +38,14 @@ class MemoDao {
     final memos =
         _realm.all<MemoModel>().query("tag.name == '${tag.name}'").toList();
     // 取得したメモのタグをタグ無しに変更する
-    final nottingTag = _realm.find<TagModel>("タグなし");
+    final nottingTag = TagMapper.toDomainModel(_realm.find<TagModel>("タグなし")!);
     for (var i = 0; i < memos.length; i++) {
-      final memo = memos[i];
-      final updatedMemo = MemoModel(
-          memo.id, memo.text, memo.createdAt, DateTime.now(),
-          tag: nottingTag);
+      final memo = MemoMapper.toDomainModel(memos[i]);
+      final updatedMemo =
+          Memo(memo.id, memo.text, memo.createdAt, DateTime.now(), nottingTag);
       try {
         _realm.write(() {
-          _realm.add(updatedMemo, update: true);
+          _realm.add(MemoMapper.toDataModel(updatedMemo), update: true);
         });
       } catch (e) {
         print(e);
@@ -58,7 +58,9 @@ class MemoDao {
   bool deleteByMemo(Memo memo) {
     try {
       _realm.write(() {
-        _realm.delete<MemoModel>(MemoMapper.toDataModel(memo));
+        final targetMemo =
+            _realm.find<MemoModel>(ObjectId.fromHexString(memo.id));
+        _realm.delete<MemoModel>(targetMemo!);
       });
       return true;
     } catch (e) {

@@ -82,6 +82,10 @@ class ReadAndEditScreenStateNotifier
     return _memoRepository.save(newMemo);
   }
 
+  bool deleteMemo(Memo memo) {
+    return _memoRepository.deleteByMemo(memo);
+  }
+
   void getAllTags() {
     final tagList = _tagRepository.getAll();
     state = state.copyWith(tags: tagList);

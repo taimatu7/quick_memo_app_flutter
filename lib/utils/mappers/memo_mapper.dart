@@ -5,13 +5,20 @@ import 'package:realm/realm.dart';
 
 class MemoMapper {
   static MemoModel toDataModel(Memo memo) {
-    return MemoModel(ObjectId.fromHexString(memo.id), memo.text, memo.updatedAt,
-        memo.createdAt,
+    return MemoModel(
+        ObjectId.fromHexString(memo.id),
+        memo.text,
+        memo.updatedAt.millisecondsSinceEpoch,
+        memo.createdAt.millisecondsSinceEpoch,
         tag: TagMapper.toDataModel(memo.tag));
   }
 
   static Memo toDomainModel(MemoModel model) {
-    return Memo(model.id.toString(), model.text, model.createdAt,
-        model.updateAt, TagMapper.toDomainModel(model.tag!));
+    return Memo(
+        model.id.toString(),
+        model.text,
+        DateTime.fromMillisecondsSinceEpoch(model.createdAt),
+        DateTime.fromMillisecondsSinceEpoch(model.updateAt),
+        TagMapper.toDomainModel(model.tag!));
   }
 }

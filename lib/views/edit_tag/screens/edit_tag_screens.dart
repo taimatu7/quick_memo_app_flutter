@@ -46,6 +46,11 @@ class EditTagScreen extends ConsumerWidget {
           // 更新したタグを表示する
           print(value.color);
           editTagScreenStateNotifier.getAllTags();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('タグを保存しました'),
+            ),
+          );
         }
       });
     }

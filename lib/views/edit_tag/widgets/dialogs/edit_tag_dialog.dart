@@ -36,9 +36,12 @@ class EditTagDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('色を入力してください'),
+      title: const Text(
+        '色を入力してください',
+        style: TextStyle(fontSize: 18),
+      ),
       content: SizedBox(
-        height: 300,
+        height: 170,
         child: Column(
           children: [
             SingleChildScrollView(
@@ -46,6 +49,7 @@ class EditTagDialog extends StatelessWidget {
                 pickerColor: pickerColor,
                 onColorChanged: _changeColor,
                 pickerAreaHeightPercent: 0.2,
+                showLabel: false,
               ),
             ),
           ],
@@ -56,7 +60,6 @@ class EditTagDialog extends StatelessWidget {
           child: const Text('OK'),
           onPressed: () {
             if (_tagTextEditingController.text.isEmpty) {
-              // TODO: エラー表示
               return;
             }
             final tempTag = Tag(_tagTextEditingController.text,

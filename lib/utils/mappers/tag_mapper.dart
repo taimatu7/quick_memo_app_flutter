@@ -1,14 +1,13 @@
 import 'package:quick_memo_app_flutter/data/datasources/local/schema.dart';
 import 'package:quick_memo_app_flutter/domain/shared/model/tag.dart';
-import 'package:realm/realm.dart';
 
 class TagMapper {
   static TagModel toDataModel(Tag tag) {
     return TagModel(
       tag.name,
       tag.color,
-      tag.updatedAt,
-      tag.createdAt,
+      tag.updatedAt.millisecondsSinceEpoch,
+      tag.createdAt.millisecondsSinceEpoch,
     );
   }
 
@@ -16,8 +15,8 @@ class TagMapper {
     return Tag(
       model.name,
       model.color,
-      model.createdAt,
-      model.updateAt,
+      DateTime.fromMillisecondsSinceEpoch(model.createdAt),
+      DateTime.fromMillisecondsSinceEpoch(model.updateAt),
     );
   }
 }

@@ -11,8 +11,8 @@ class MemoModel extends _MemoModel
   MemoModel(
     ObjectId id,
     String text,
-    DateTime updateAt,
-    DateTime createdAt, {
+    int updateAt,
+    int createdAt, {
     TagModel? tag,
   }) {
     RealmObjectBase.set(this, 'id', id);
@@ -40,17 +40,14 @@ class MemoModel extends _MemoModel
   set tag(covariant TagModel? value) => RealmObjectBase.set(this, 'tag', value);
 
   @override
-  DateTime get updateAt =>
-      RealmObjectBase.get<DateTime>(this, 'updateAt') as DateTime;
+  int get updateAt => RealmObjectBase.get<int>(this, 'updateAt') as int;
   @override
-  set updateAt(DateTime value) => RealmObjectBase.set(this, 'updateAt', value);
+  set updateAt(int value) => RealmObjectBase.set(this, 'updateAt', value);
 
   @override
-  DateTime get createdAt =>
-      RealmObjectBase.get<DateTime>(this, 'createdAt') as DateTime;
+  int get createdAt => RealmObjectBase.get<int>(this, 'createdAt') as int;
   @override
-  set createdAt(DateTime value) =>
-      RealmObjectBase.set(this, 'createdAt', value);
+  set createdAt(int value) => RealmObjectBase.set(this, 'createdAt', value);
 
   @override
   Stream<RealmObjectChanges<MemoModel>> get changes =>
@@ -68,8 +65,8 @@ class MemoModel extends _MemoModel
       SchemaProperty('text', RealmPropertyType.string),
       SchemaProperty('tag', RealmPropertyType.object,
           optional: true, linkTarget: 'TagModel'),
-      SchemaProperty('updateAt', RealmPropertyType.timestamp),
-      SchemaProperty('createdAt', RealmPropertyType.timestamp),
+      SchemaProperty('updateAt', RealmPropertyType.int),
+      SchemaProperty('createdAt', RealmPropertyType.int),
     ]);
   }
 }
@@ -79,8 +76,8 @@ class TagModel extends _TagModel
   TagModel(
     String name,
     int color,
-    DateTime updateAt,
-    DateTime createdAt,
+    int updateAt,
+    int createdAt,
   ) {
     RealmObjectBase.set(this, 'name', name);
     RealmObjectBase.set(this, 'color', color);
@@ -101,17 +98,14 @@ class TagModel extends _TagModel
   set color(int value) => RealmObjectBase.set(this, 'color', value);
 
   @override
-  DateTime get updateAt =>
-      RealmObjectBase.get<DateTime>(this, 'updateAt') as DateTime;
+  int get updateAt => RealmObjectBase.get<int>(this, 'updateAt') as int;
   @override
-  set updateAt(DateTime value) => RealmObjectBase.set(this, 'updateAt', value);
+  set updateAt(int value) => RealmObjectBase.set(this, 'updateAt', value);
 
   @override
-  DateTime get createdAt =>
-      RealmObjectBase.get<DateTime>(this, 'createdAt') as DateTime;
+  int get createdAt => RealmObjectBase.get<int>(this, 'createdAt') as int;
   @override
-  set createdAt(DateTime value) =>
-      RealmObjectBase.set(this, 'createdAt', value);
+  set createdAt(int value) => RealmObjectBase.set(this, 'createdAt', value);
 
   @override
   Stream<RealmObjectChanges<TagModel>> get changes =>
@@ -127,8 +121,8 @@ class TagModel extends _TagModel
     return const SchemaObject(ObjectType.realmObject, TagModel, 'TagModel', [
       SchemaProperty('name', RealmPropertyType.string, primaryKey: true),
       SchemaProperty('color', RealmPropertyType.int),
-      SchemaProperty('updateAt', RealmPropertyType.timestamp),
-      SchemaProperty('createdAt', RealmPropertyType.timestamp),
+      SchemaProperty('updateAt', RealmPropertyType.int),
+      SchemaProperty('createdAt', RealmPropertyType.int),
     ]);
   }
 }

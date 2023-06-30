@@ -36,9 +36,12 @@ class AddTagDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('タグ名と色を入力してください'),
+      title: const Text(
+        'タグ名と色を入力してください',
+        style: TextStyle(fontSize: 18),
+      ),
       content: SizedBox(
-        height: 300,
+        height: 240,
         child: Column(
           children: [
             SizedBox(
@@ -46,9 +49,7 @@ class AddTagDialog extends StatelessWidget {
               child: TextField(
                 controller: _tagTextEditingController,
                 decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'タグ名',
-                ),
+                    border: OutlineInputBorder(), labelText: '※タグ名'),
               ),
             ),
             const SizedBox(
@@ -59,6 +60,7 @@ class AddTagDialog extends StatelessWidget {
                 pickerColor: pickerColor,
                 onColorChanged: _changeColor,
                 pickerAreaHeightPercent: 0.2,
+                showLabel: false,
               ),
             ),
           ],
@@ -69,7 +71,6 @@ class AddTagDialog extends StatelessWidget {
           child: const Text('OK'),
           onPressed: () {
             if (_tagTextEditingController.text.isEmpty) {
-              // TODO: エラー表示
               return;
             }
             final tempTag = Tag(_tagTextEditingController.text,

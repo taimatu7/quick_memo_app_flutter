@@ -47,7 +47,13 @@ class ReadAndEditDialogState extends State<ReadAndEditDialog> {
 
   List<DropdownMenuItem<String>> createTagItemList(List<Tag> tagList) {
     return tagList
-        .map((tag) => DropdownMenuItem(value: tag.name, child: Text(tag.name)))
+        .map((tag) => DropdownMenuItem(
+            value: tag.name,
+            child: Text(
+                tag.name.length > 10
+                    ? '${tag.name.substring(0, 10)}...'
+                    : tag.name,
+                overflow: TextOverflow.ellipsis)))
         .toList();
   }
 
@@ -92,16 +98,18 @@ class ReadAndEditDialogState extends State<ReadAndEditDialog> {
                           style: TextStyle(fontSize: 15),
                         ),
                       ),
-                      DropdownButton(
-                          value: _selectedTag.name,
-                          items: createTagItemList(tagList),
-                          onChanged: (value) {
-                            setState(() {
-                              Tag tempTag = tagList.firstWhere(
-                                  (element) => element.name == value);
-                              _selectedTag = tempTag;
-                            });
-                          }),
+                      Container(
+                        child: DropdownButton(
+                            value: _selectedTag.name,
+                            items: createTagItemList(tagList),
+                            onChanged: (value) {
+                              setState(() {
+                                Tag tempTag = tagList.firstWhere(
+                                    (element) => element.name == value);
+                                _selectedTag = tempTag;
+                              });
+                            }),
+                      ),
                     ],
                   ),
                 ),
